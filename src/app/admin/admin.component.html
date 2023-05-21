@@ -1,0 +1,43 @@
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mt-5" style="color:white;">
+                <h3 align="center" style="color: white;text-decoration: underline;">PERSONAL INFORMATION</h3>
+                <div class="col-sm-3 justify-content-start">
+                <p>Username:</p>
+                <p>Full Name:</p>
+                <p>Email:</p>
+                <p>Password:</p>
+                </div>
+            </div>
+            <div class="col-lg-6 mt-5">
+                <h3 align="center" style="color: white;text-decoration: underline;">LIST OF USERS</h3>
+            </div>
+        </div>
+    </div>
+</section>
+<Section>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <h3 align="center" style="color: white;text-decoration: underline;">CHAT</h3>
+                <div id="chatbox">
+                    <router-outlet>
+                        <app-chatbox></app-chatbox>
+                    </router-outlet>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</Section>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const chatboxElement = document.getElementById('chatbox');
+      const chatbox = new chatboxApp.ChatboxComponent();
+      chatboxElement.appendChild(chatbox.render());
+    });
+  </script>
+  
+
+

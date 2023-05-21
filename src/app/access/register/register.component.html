@@ -1,28 +1,26 @@
 <div class="container">
   <div class="row justify-content-center">
-    <h1 style="font-weight: bold;font-family: arial;text-decoration: underline;color: white;" align="center">REGISTRATION</h1>
+    <h1 class="mt-5" style="font-weight: bold; font-family: arial; text-decoration: underline; color: white;" align="center">REGISTRATION</h1>
     <div class="col-xl-4">
-      <form>
+      <form action="/register" method="post">
         <div class="form-group col-lg-12">
           <label style="color: white;">Username</label>
-          <input type="text" class="form-control" id="usn" placeholder="Enter Username">
+          <input type="text" class="form-control" name="username" placeholder="Enter Username" required>
         </div>
         <div class="form-group col-lg-12">
           <label style="color: white;">Full Name</label>
-          <input type="text" class="form-control" id="fn" placeholder="Enter Full Name">
+          <input type="text" class="form-control" name="fullname" placeholder="Enter Full Name" required>
         </div>
         <div class="form-group col-lg-12">
           <label style="color: white;">Email address</label>
-          <input type="email" class="form-control" id="email" placeholder="Enter Email">
+          <input type="email" class="form-control" name="email" placeholder="Enter Email" required>
         </div>
         <div class="form-group col-lg-12">
           <label style="color: white;">Password</label>
-          <input type="password" class="form-control" id="pass" placeholder="Password">
+          <input type="password" class="form-control" name="password" placeholder="Password" required>
         </div>
         
         <button type="submit" class="btn btn-primary mt-2">Submit</button><br>
-        <label style="color: white;">Already Have an Account?<br>return home to login:</label>
-      <a class="btn btn-secondary" routerLink="login">Home</a>
       </form>
        <br>
     </div>
