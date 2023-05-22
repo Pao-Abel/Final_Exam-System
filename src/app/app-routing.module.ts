@@ -12,8 +12,7 @@ import { ItemListComponent } from './item-list/item-list.component';
 import { ItemDetailComponent } from './item-detail/item-detail.component';
 import { ItemCreateComponent } from './item-create/item-create.component';
 import { ItemEditComponent } from './item-edit/item-edit.component';
-import { HttpClientModule } from '@angular/common/http';
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+
 
 
 const routes: Routes = [

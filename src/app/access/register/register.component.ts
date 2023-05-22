@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router'; // Import Router
 
 @Component({
   selector: 'app-register',
-  templateUrl: 'register.component.html',
-  styleUrls: ['register.component.scss']
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
   formData = {
@@ -15,21 +14,18 @@ export class RegisterComponent {
     password: ''
   };
 
-  constructor(private http: HttpClient, private router: Router) { } // Inject Router
+  constructor(private http: HttpClient) { }
 
   registerUser() {
-    this.http.post('api/users/register', this.formData)
+    this.http.post('http://localhost:3306/api/register', this.formData)
       .subscribe(
-        (response: any) => {
-          console.log('Registration successful:', response);
-          this.router.navigate(['client']);
-          console.log('Registration successful');
-          
-          // Perform any additional actions upon successful registration
+        response => {
+          // Handle successful registration response
+          console.log(response);
         },
-        (error: any) => {
-          console.error('Registration failed:', error);
+        error => {
           // Handle error response
+          console.error(error);
         }
       );
   }

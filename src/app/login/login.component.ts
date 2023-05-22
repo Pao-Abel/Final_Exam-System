@@ -1,35 +1,33 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
-  styleUrls: ['./login.component.scss'],
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  email = '';
-  password = '';
-  error = '';
+  email: string = ''; // Declare the email property
+  pass: string = ''; // Declare the pass property
 
-  constructor(private router: Router, private http: HttpClient) {}
+  formData = {
+    username: this.email,
+    password: this.pass
+  };
+
+  constructor(private http: HttpClient) { }
 
   login() {
-    this.error = '';
-    const url = 'api/users';
-    const body = { email: this.email, password: this.password };
-
-    this.http.post(url, body).subscribe(
-      (response: any) => {
-        if (response && response.id) {
-          console.log('Login successful:', response);
-          this.router.navigate(['client']);
-        } else {
-          this.error = 'Invalid email or password';
-        }
+    this.http.post('http://localhost:3306/api/login', this.formData).subscribe(
+      response => {
+        // Handle successful login response
+        console.log(response);
+        // You can perform further actions here, such as storing the user token, redirecting to another page, etc.
       },
-      (error: any) => {
-        this.error = 'An error occurred. Please try again.';
+      error => {
+        // Handle error response
+        console.error(error);
+        // You can display an error message to the user or perform other error handling actions
       }
     );
   }
