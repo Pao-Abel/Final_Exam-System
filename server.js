@@ -1,14 +1,12 @@
 const express = require('express');
 const { MongoClient } = require('mongodb');
-const { ngExpressEngine } = require('@nguniversal/express-engine');
-const { provideModuleMap } = require('@nguniversal/module-map-ngfactory-loader');
-const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require('./path-to-your-app-module.ngfactory'); // Update with the path to your app's module factory
+const path = require('path');
 
 const app = express();
 
 // MongoDB configuration
-const mongoUrl = 'mongodb://localhost:27017/my-database'; // Replace with your MongoDB connection URL
-const mongoCollection = 'my-collection'; // Replace with the desired collection name
+const mongoUrl = 'mongodb://localhost:27017/mh'; // Replace with your MongoDB connection URL
+const mongoCollection = 'register'; // Replace with the desired collection name
 
 let db;
 
@@ -24,6 +22,9 @@ MongoClient.connect(mongoUrl)
 
 // Middleware to parse request bodies as JSON
 app.use(express.json());
+
+// Serve static files from the Angular app
+app.use(express.static(path.join(__dirname, 'dist/angular-app')));
 
 // Register route
 app.post('/register', (req, res) => {
@@ -76,37 +77,9 @@ app.post('/login', (req, res) => {
     });
 });
 
-// Server-side rendering route
+// Serve the Angular app for any other routes
 app.get('*', (req, res) => {
-  // Fetch data from MongoDB
-  db.collection(mongoCollection)
-    .find()
-    .toArray()
-    .then(data => {
-      // Render Angular application
-      const renderOptions = {
-        bootstrap: AppServerModuleNgFactory,
-        providers: [
-          provideModuleMap(LAZY_MODULE_MAP),
-          { provide: 'serverUrl', useValue: `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}` }
-        ]
-      };
-
-      ngExpressEngine(renderOptions)
-        .then(html => {
-          // Send the rendered HTML response
-          res.setHeader('Content-Type', 'text/html');
-          res.send(html);
-        })
-        .catch(error => {
-          console.error('Server rendering error:', error);
-          res.sendStatus(500);
-        });
-    })
-    .catch(error => {
-      console.error('MongoDB error:', error);
-      res.sendStatus(500);
-    });
+  res.sendFile(path.join(__dirname, 'dist/angular-app/index.html'));
 });
 
 // Start the server
