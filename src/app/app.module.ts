@@ -15,10 +15,6 @@ import { Error404Component } from './error404/error404.component';
 import { ClientComponent } from './client/client.component';
 import { AdminComponent } from './admin/admin.component';
 import { ChatboxComponent } from './chatbox/chatbox.component';
-import { ItemListComponent } from './item-list/item-list.component';
-import { ItemDetailComponent } from './item-detail/item-detail.component';
-import { ItemCreateComponent } from './item-create/item-create.component';
-import { ItemEditComponent } from './item-edit/item-edit.component';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { MockApiService } from './mock-api.service';
 import { LoginComponent } from './login/login.component';
@@ -49,10 +45,6 @@ export class DataService {
     ClientComponent,
     AdminComponent,
     ChatboxComponent,
-    ItemListComponent,
-    ItemDetailComponent,
-    ItemCreateComponent,
-    ItemEditComponent,
     LoginComponent,
   ],
   imports: [
